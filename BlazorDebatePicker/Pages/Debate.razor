@@ -1,0 +1,23 @@
+﻿@page "/debate"
+@using BlazorDebatePicker.Classes;
+@using OfficeOpenXml;
+
+<PageTitle>Topics</PageTitle>
+
+<h1>Topic</h1>
+
+<p role="status">Current Topic: @topic</p>
+
+<button class="btn btn-primary" @onclick="ListTopic">Click me</button>
+
+@code {
+
+    const string path = @"D:\Documents\Topics.xlsx";
+    string topic = string.Empty;
+
+    public void ListTopic()
+    {
+        topic = DebatePicker.ListTopic(path);
+    }
+
+}
