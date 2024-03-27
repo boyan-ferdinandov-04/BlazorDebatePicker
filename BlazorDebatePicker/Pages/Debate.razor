@@ -6,18 +6,21 @@
 
 <h1>Topic</h1>
 
-<p role="status">Current Topic: @topic</p>
+@foreach (var topic in topics)
+{
+    <p>@($"{topics.IndexOf(topic) + 1}. {topic}")</p>
+}
 
-<button class="btn btn-primary" @onclick="ListTopic">Click me</button>
+<button class="btn btn-primary" @onclick="ListTopic">Generate a topic</button>
 
 @code {
 
-    const string path = @"D:\Documents\Topics.xlsx";
-    string topic = string.Empty;
+    const string path = @"E:\Documents\Topics.xlsx";
+    List<string> topics = new();
 
     public void ListTopic()
     {
-        topic = DebatePicker.ListTopic(path);
+        topics = DebatePicker.ListTopic(path);
     }
 
 }

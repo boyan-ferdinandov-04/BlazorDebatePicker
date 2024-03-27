@@ -5,6 +5,7 @@ namespace BlazorDebatePicker.Classes
 {
     public static class DebatePicker
     {
+        static List<string> topics = null;
         public static List<string> ReadTopics(string filePath)
         {
             List<string> topics = new List<string>();
@@ -27,13 +28,21 @@ namespace BlazorDebatePicker.Classes
             return topics;
         }
 
-        public static string ListTopic(string filePath)
+        public static List<string> ListTopic(string filePath)
         {
-            List<string> topics = ReadTopics(filePath);
+            topics ??= ReadTopics(filePath);
+            List<string> randomTopics = new List<string>();
             Random random = new Random();
+            int count = 4;
 
-            int debateIndex = random.Next(topics.Count);
-            return topics[debateIndex];
+
+            for (int i = 0; i < count; i++)
+            {
+                int debateIndex = random.Next(topics.Count);
+                randomTopics.Add(topics[debateIndex]);
+                topics.RemoveAt(debateIndex);
+            }
+            return randomTopics;
         }
     }
 }
